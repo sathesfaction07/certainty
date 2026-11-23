@@ -15,7 +15,7 @@ setup_venv() {
 
 select_cloud() {
     echo ""
-    echo "  CertValidator uses an LLM to read certificates."
+    echo "  Certainty uses an LLM to read certificates."
     echo "  Choose backend:"
     echo "  1) AWS (Bedrock Claude + optional Textract)"
     echo "  2) Google Cloud (Document AI + optional Gemini)"
@@ -27,7 +27,7 @@ select_cloud() {
 setup_aws() {
     read -p "AWS Account ID: " ACCT
     read -p "Region [us-east-1]: " REGION; REGION=${REGION:-us-east-1}
-    ROLE="CertValidator-AppRole"
+    ROLE="Certainty-AppRole"
 
     POLICY=$(cat <<EOF
 {"Version":"2012-10-17","Statement":[
@@ -39,7 +39,7 @@ EOF
     TRUST="{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::${ACCT}:root\"},\"Action\":\"sts:AssumeRole\"}]}"
 
     aws iam get-role --role-name "$ROLE" &>/dev/null 2>&1 || aws iam create-role --role-name "$ROLE" --assume-role-policy-document "$TRUST" --output text --query 'Role.Arn'
-    aws iam put-role-policy --role-name "$ROLE" --policy-name "CertValidator-Access" --policy-document "$POLICY" 2>/dev/null
+    aws iam put-role-policy --role-name "$ROLE" --policy-name "Certainty-Access" --policy-document "$POLICY" 2>/dev/null
     echo "AWS role configured."
     echo "CERT_VALIDATOR_BACKEND=claude" > .env
     echo "AWS_DEFAULT_REGION=${REGION}" >> .env
@@ -49,17 +49,17 @@ setup_gcp() {
     read -p "GCP Project ID: " PROJECT
     gcloud config set project "$PROJECT" --quiet
     gcloud services enable documentai.googleapis.com --quiet 2>/dev/null
-    pip install "cert-validator[google]" --quiet
+    pip install "certainty[google]" --quiet
     echo "CF_BACKEND=google" > .env
     echo "Google Document AI enabled."
 }
 
 main() {
     echo "╔═══════════════════════════════════════════════════════════════╗"
-    echo "║            CertValidator — Setup                             ║"
+    echo "║            Certainty — Setup                             ║"
     echo "╚═══════════════════════════════════════════════════════════════╝"
     detect_os; find_python; setup_venv; select_cloud
-    echo ""; echo "Ready. Run: cert-validator data/sample_certs/ --category toys"
+    echo ""; echo "Ready. Run: certainty data/sample_certs/ --category toys"
 }
 
 main "$@"

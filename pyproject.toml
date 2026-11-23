@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "cert-validator"
+name = "certainty"
 version = "3.0.0"
 requires-python = ">=3.11"
 dependencies = [
@@ -22,7 +22,7 @@ dev = [
 ]
 
 [project.scripts]
-cert-validator = "cert_validator.cli:main"
+certainty = "cert_validator.cli:main"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -41,6 +41,6 @@ select = ["E", "F", "I", "N", "UP", "B", "SIM", "RUF"]
 packages = ["src/cert_validator"]
 
 [tool.ruff.lint.per-file-ignores]
-# Long lines here are prompt text and log f-strings; see the note in batch-validator.
+# Long lines here are prompt text and log f-strings; see the note in twinlane.
 "src/cert_validator/backends/claude_vision.py" = ["E501"]
 "src/cert_validator/core/pipeline.py" = ["E501"]

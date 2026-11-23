@@ -1,4 +1,4 @@
-# CertValidator
+# Certainty
 
 Validates compliance certificates by identifying test standards in documents and checking them against category-specific requirements. Accepts PDFs (scanned or native), DOCX, TXT, and raw images. Processes single files or entire directories. Supports three extraction backends — Claude Vision, Amazon Textract, and Google Document AI — selectable at runtime.
 
@@ -10,7 +10,7 @@ Product compliance requires certificates proving specific test standards were me
 
 A reviewer needs to answer one question: "Does this document contain the standards required for this product category?" At 200+ certificates per week across 12 categories, each with different required standards, this is tedious and error-prone manually.
 
-CertValidator answers that question by sending the document to a vision-capable LLM that reads it like a human would, then checking the identified standards against the category's requirements.
+Certainty answers that question by sending the document to a vision-capable LLM that reads it like a human would, then checking the identified standards against the category's requirements.
 
 ---
 
@@ -81,7 +81,7 @@ Input (file or directory)
 ## Project Structure
 
 ```
-cert-validator/
+certainty/
 ├── src/cert_validator/
 │   ├── cli.py                    Click entry point
 │   ├── backends/
@@ -111,26 +111,26 @@ cert-validator/
 pip install -e ".[dev]"
 
 # Single file
-cert-validator certificate.pdf --category toys
+certainty certificate.pdf --category toys
 
 # Auto-detect category (LLM identifies it from content)
-cert-validator certificate.pdf
+certainty certificate.pdf
 
 # Entire directory of mixed formats
-cert-validator certs/ --category batteries --output results.json
+certainty certs/ --category batteries --output results.json
 
 # CSV output for spreadsheet workflows
-cert-validator certs/ --category toys --output audit.csv
+certainty certs/ --category toys --output audit.csv
 
 # Use Textract backend for degraded scans
-cert-validator scanned/ --category chargers --backend textract
+certainty scanned/ --category chargers --backend textract
 
 # Use Google Document AI
-pip install "cert-validator[google]"
-cert-validator certs/ --backend google
+pip install "certainty[google]"
+certainty certs/ --backend google
 
 # List available categories
-cert-validator --list-categories
+certainty --list-categories
 ```
 
 ---

@@ -1,8 +1,8 @@
-# CertValidator — Technical Architecture
+# Certainty — Technical Architecture
 
 ## Overview
 
-CertValidator is a compliance certificate pre-screening tool that identifies test standards in documents (PDF, DOCX, TXT, images) and verifies them against category-specific requirements. It accepts single files or batch directories, extracts content using OCR or direct text parsing, sends extracted data to Claude Vision via AWS Bedrock for standard identification using structured prompting, and produces pass/fail verdicts with detailed explanations suitable for human review.
+Certainty is a compliance certificate pre-screening tool that identifies test standards in documents (PDF, DOCX, TXT, images) and verifies them against category-specific requirements. It accepts single files or batch directories, extracts content using OCR or direct text parsing, sends extracted data to Claude Vision via AWS Bedrock for standard identification using structured prompting, and produces pass/fail verdicts with detailed explanations suitable for human review.
 
 **Design principle:** This tool pre-screens and flags — it does not approve. All validation outputs require human review. The system identifies missing standards and surfaces confidence signals, but final compliance decisions remain with trained reviewers.
 
@@ -12,7 +12,7 @@ CertValidator is a compliance certificate pre-screening tool that identifies tes
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                     CLI ENTRY (cert-validator)                          │
+│                     CLI ENTRY (certainty)                          │
 │                                                                         │
 │  Arguments: file/directory, --category, --backend, --output            │
 │  Outputs: JSON (structured) or CSV (spreadsheet-ready)                 │
@@ -116,7 +116,7 @@ CertValidator is a compliance certificate pre-screening tool that identifies tes
 
 ### 1. CLI (`src/cert_validator/cli.py`)
 
-Entry point: `cert-validator` (Click-based)
+Entry point: `certainty` (Click-based)
 
 | Flag | Purpose |
 |:--|:--|
@@ -239,7 +239,7 @@ This handles:
 ## Data Flow
 
 ```
-1. User invokes: cert-validator certificate.pdf --category toys --output results.json
+1. User invokes: certainty certificate.pdf --category toys --output results.json
 2. CLI validates inputs, initializes ClaudeVisionBackend(region="us-east-1")
 3. validate_certificate() loads CategoryRule for "toys" (3 required standards)
 4. extract_content() detects .pdf extension, calls pdf_to_images()
@@ -334,7 +334,7 @@ export GOOGLE_PROJECT_ID=project-123456
 export GOOGLE_PROCESSOR_ID=abc123def456
 
 # Runtime configuration via CLI flags
-cert-validator <path> \
+certainty <path> \
   --category <category> \
   --backend claude|textract|google \
   --region us-east-1 \
@@ -355,22 +355,22 @@ pip install -e ".[dev]"           # includes pytest, ruff
 pip install -e ".[google]"        # adds google-cloud-documentai
 
 # Single file validation
-cert-validator certificate.pdf --category toys
+certainty certificate.pdf --category toys
 
 # Auto-detect category
-cert-validator certificate.pdf
+certainty certificate.pdf
 
 # Batch processing (directory)
-cert-validator certs/ --category batteries --output results.csv
+certainty certs/ --category batteries --output results.csv
 
 # Use Textract for degraded scans
-cert-validator scanned_faxes/ --category chargers --backend textract
+certainty scanned_faxes/ --category chargers --backend textract
 
 # Use Google Document AI
-cert-validator docs/ --backend google --output results.json
+certainty docs/ --backend google --output results.json
 
 # List available categories
-cert-validator --list-categories
+certainty --list-categories
 ```
 
 ---
