@@ -1,0 +1,62 @@
+{
+    "toys": {
+        "description": "Children's toys — CPSIA/ASTM compliance",
+        "standards": ["ASTM F963", "CPSIA Section 101", "16 CFR 1303"],
+        "threshold": 80
+    },
+    "batteries": {
+        "description": "Lithium and consumer batteries",
+        "standards": ["UL 2054", "IEC 62133", "UN 38.3", "UL 2580"],
+        "threshold": 90
+    },
+    "chargers": {
+        "description": "USB and power adapters",
+        "standards": ["UL 60950-1", "IEC 60950-1", "UL 62368-1"],
+        "threshold": 88
+    },
+    "laser_products": {
+        "description": "Laser pointers and devices",
+        "standards": ["21 CFR 1040.10", "IEC 60825-1"],
+        "threshold": 92
+    },
+    "e_bikes": {
+        "description": "Electric bicycles and scooters",
+        "standards": ["UL 2849", "EN 15194", "UL 2272"],
+        "threshold": 88
+    },
+    "smoke_alarms": {
+        "description": "Smoke and CO detectors",
+        "standards": ["UL 217", "UL 2034", "NFPA 72"],
+        "threshold": 90
+    },
+    "helmets": {
+        "description": "Bicycle and sport helmets",
+        "standards": ["CPSC 16 CFR 1203", "ASTM F1447"],
+        "threshold": 85
+    },
+    "cosmetics": {
+        "description": "Skincare and cosmetic products",
+        "standards": ["FDA 21 CFR 700", "EU Regulation 1223/2009"],
+        "threshold": 80
+    },
+    "supplements": {
+        "description": "Dietary and health supplements",
+        "standards": ["FDA 21 CFR 111", "cGMP Compliance"],
+        "threshold": 82
+    },
+    "furniture": {
+        "description": "Children's furniture and cribs",
+        "standards": ["ASTM F2057", "16 CFR 1219", "ASTM F1169"],
+        "threshold": 85
+    },
+    "electronics": {
+        "description": "General consumer electronics",
+        "standards": ["FCC Part 15", "UL 62368-1"],
+        "threshold": 85
+    },
+    "textiles": {
+        "description": "Flammable fabrics and clothing",
+        "standards": ["16 CFR 1610", "16 CFR 1615"],
+        "threshold": 82
+    }
+}
