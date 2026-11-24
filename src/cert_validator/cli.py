@@ -70,7 +70,7 @@ def main(path, category, backend_name, region, output_path, show_categories, ver
         if out.suffix == ".csv":
             export_csv(results, out)
         else:
-            with open(out, "w") as f:
+            with open(out, "w", encoding="utf-8") as f:
                 json.dump(results, f, indent=2)
         click.echo(f"Results written to {output_path}")
     else:

@@ -22,7 +22,7 @@ def load_rules(category: str) -> CategoryRule | None:
         logger.error(f"Rules file not found: {rules_file}")
         return None
 
-    with open(rules_file) as f:
+    with open(rules_file, encoding="utf-8") as f:
         all_rules = json.load(f)
 
     rule_data = all_rules.get(category.lower())
@@ -42,5 +42,5 @@ def list_categories() -> list[str]:
     rules_file = RULES_DIR / "categories.json"
     if not rules_file.exists():
         return []
-    with open(rules_file) as f:
+    with open(rules_file, encoding="utf-8") as f:
         return list(json.load(f).keys())
