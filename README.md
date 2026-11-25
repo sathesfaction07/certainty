@@ -2,6 +2,8 @@
 
 Validates compliance certificates by identifying test standards in documents and checking them against category-specific requirements. Accepts PDFs (scanned or native), DOCX, TXT, and raw images. Processes single files or entire directories. Supports three extraction backends — Claude Vision, Amazon Textract, and Google Document AI — selectable at runtime.
 
+**Engagement readout:** [ENGAGEMENT.md](ENGAGEMENT.md) describes how this would be scoped, proven and rolled out for a customer, including what is not yet measured.
+
 ---
 
 ## The Problem
